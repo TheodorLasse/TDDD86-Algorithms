@@ -1,0 +1,27 @@
+--- Del A ---
+
+run() är själva motorn i simulationen. Det är den som processerar alla event. När det är slut på events eller en viss tid har passerat så avslutas eventen.
+
+harvestTonnageNow() börjar med att hitta alla fiskar som inte är fångade eller döda. Sedan loopar den igenom alla fiskar, om fisken är för liten för att fångas stoppas den tillbaka i allTheFish, annars så minskar befolkningen och fisk fångas.
+
+
+Verkar inte kollapsa när:
+MIN_CATCHABLE_AGE = 500
+LANDING = 60000
+
+MIN_CATCHABLE_AGE = 600
+LANDING = 80000
+
+MIN_CATCHABLE_AGE = 700
+LANDING = 100000
+
+Vår hypotes är att MIN_CATCHABLE_AGE behöver öka med 50 om LANDING ökar med 10000 för att fiskbestånded ska vara hållbart.
+
+
+Fish och Event objekten allokeras i Event.cpp. De förstörs i Sumulations dekonstruktor, samt under simulationens gång när fiskar dör eller blir fångade. Det finns inga minnesläckor.
+
+
+--- Del C ---
+
+Med O(1) tidskomplexitet så tog det 12 sekunder.
+Med O(N) tidskomplexitet så fastande den runt 2500 simulation time, och efter någon minut avbröt vi experimentet.
